@@ -35,7 +35,7 @@ type Executable struct {
 
 var application = New()
 
-func New() Application {
+func New() *Application {
 
 	hostname, _ := os.Hostname()
 	eDir := unknown
@@ -60,7 +60,7 @@ func New() Application {
 		system = "Linux"
 	}
 
-	return Application{
+	return &Application{
 		Name: name,
 		Version: Version{
 			Major: 0,
@@ -88,7 +88,7 @@ func SetVersion(major, minor, patch int) {
 	}
 }
 
-func GetApplication() Application {
+func GetApplication() *Application {
 	return application
 }
 
