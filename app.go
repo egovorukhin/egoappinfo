@@ -30,12 +30,12 @@ func (v Version) String() string {
 
 type Executable struct {
 	File string
-	Dir string
+	Dir  string
 }
 
-var application = new()
+var application = New()
 
-func new() Application {
+func New() Application {
 
 	hostname, _ := os.Hostname()
 	eDir := unknown
@@ -48,7 +48,7 @@ func new() Application {
 
 	ext := filepath.Ext(eFile)
 	fn := filepath.Base(eFile)
-	name := strings.Title(fn[:len(fn) - len(ext)])
+	name := strings.Title(fn[:len(fn)-len(ext)])
 
 	system := runtime.GOOS
 	switch system {
@@ -68,7 +68,7 @@ func new() Application {
 			Patch: 1,
 		},
 		Hostname: hostname,
-		System: system,
+		System:   system,
 		Executable: Executable{
 			File: eFile,
 			Dir:  eDir,
@@ -80,7 +80,7 @@ func SetName(name string) {
 	application.Name = name
 }
 
-func SetVersion(major, minor, patch int)  {
+func SetVersion(major, minor, patch int) {
 	application.Version = Version{
 		Major: major,
 		Minor: minor,
