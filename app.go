@@ -11,17 +11,30 @@ import (
 const unknown = "unknown"
 
 type Application struct {
-	Name       string
-	Version    Version
-	Hostname   string
-	System     string
-	Executable Executable
+	Name        string
+	Version     Version
+	Hostname    string
+	System      string
+	Executable  Executable
+	Environment Environment
 }
 
 type Version struct {
 	Major int
 	Minor int
 	Patch int
+}
+
+type Environment string
+
+const (
+	None Environment = "none"
+	Test             = "test"
+	Prod             = "production"
+)
+
+func (e Environment) String() string {
+	return string(e)
 }
 
 func (v Version) String() string {
@@ -73,6 +86,7 @@ func New() *Application {
 			File: eFile,
 			Dir:  eDir,
 		},
+		Environment: None,
 	}
 }
 
@@ -86,6 +100,10 @@ func SetVersion(major, minor, patch int) {
 		Minor: minor,
 		Patch: patch,
 	}
+}
+
+func SetEnvironment(env string) {
+	application.Environment = Environment(env)
 }
 
 func GetApplication() *Application {
@@ -106,4 +124,8 @@ func GetVersion() Version {
 
 func GetExecutable() Executable {
 	return application.Executable
+}
+
+func GetEnvironment() Environment {
+	return application.Environment
 }
