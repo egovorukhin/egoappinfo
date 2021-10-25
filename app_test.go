@@ -23,4 +23,9 @@ func TestAppInfo(t *testing.T) {
 	if GetEnvironment() == Prod {
 		fmt.Println("Production")
 	}
+	if IsTest() {
+		fmt.Println("Test")
+	} else {
+		fmt.Println("Production")
+	}
 }

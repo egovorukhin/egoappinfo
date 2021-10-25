@@ -25,18 +25,6 @@ type Version struct {
 	Patch int
 }
 
-type Environment string
-
-const (
-	None Environment = "none"
-	Test             = "test"
-	Prod             = "production"
-)
-
-func (e Environment) String() string {
-	return string(e)
-}
-
 func (v Version) String() string {
 	return fmt.Sprintf("%d.%d.%d", v.Major, v.Minor, v.Patch)
 }
